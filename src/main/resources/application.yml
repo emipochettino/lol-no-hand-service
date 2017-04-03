@@ -1,0 +1,11 @@
+application.name: "lol-no-hand-service"
+
+swagger:
+    service:
+        version: "1.0"
+        title: ${application.name}
+        description: "A service that provides APIs for lol no hand"
+        termsPath: ""
+        email: "emipochettino@gmail.com"
+        licenceType: ""
+        licencePath: ""
