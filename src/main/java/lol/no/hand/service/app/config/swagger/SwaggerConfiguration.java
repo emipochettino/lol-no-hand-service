@@ -49,7 +49,7 @@ public class SwaggerConfiguration {
 	 */
 	@SuppressWarnings("unchecked")
 	private Predicate<String> paths() {
-		return or(regex("/service.*"));
+		return or(regex("/v1/api.*"));
 
 	}
 }
