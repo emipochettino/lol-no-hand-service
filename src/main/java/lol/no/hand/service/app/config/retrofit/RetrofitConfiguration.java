@@ -3,7 +3,7 @@ package lol.no.hand.service.app.config.retrofit;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import lol.no.hand.service.app.service.SummonerService;
+import lol.no.hand.service.app.rito.api.RitoApi;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -17,10 +17,14 @@ public class RetrofitConfiguration {
 	}
 
 	@Bean
-	public SummonerService summonerService(OkHttpClient client) {
-		Retrofit retrofit = new Retrofit.Builder().baseUrl("https://las.api.riotgames.com/api/lol/LAS/v1.4/summoner/")
-				.client(client).addConverterFactory(JacksonConverterFactory.create()).build();
+	public RitoApi summonerService(OkHttpClient client) {
+		Retrofit retrofit = new Retrofit
+				.Builder()
+				.baseUrl("https://las.api.riotgames.com/api/lol/LAS/v1.4/summoner/")
+				.client(client)
+				.addConverterFactory(JacksonConverterFactory.create())
+				.build();
 
-		return retrofit.create(SummonerService.class);
+		return retrofit.create(RitoApi.class);
 	}
 }

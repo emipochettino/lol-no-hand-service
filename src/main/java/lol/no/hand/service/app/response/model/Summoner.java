@@ -1,15 +1,26 @@
 package lol.no.hand.service.app.response.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import lol.no.hand.service.app.deserializer.SummonerDeserializer;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@RequiredArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonAutoDetect
+@JsonDeserialize(using = SummonerDeserializer.class)
 public class Summoner {
+	@NonNull
 	private int id;
+	@NonNull
 	private String name;
+	@NonNull
 	private int summonerLevel;
 }
