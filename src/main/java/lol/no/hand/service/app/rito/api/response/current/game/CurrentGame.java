@@ -1,4 +1,4 @@
-package lol.no.hand.service.app.rito.api.response;
+package lol.no.hand.service.app.rito.api.response.current.game;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CurrentMatch {
+public class CurrentGame {
 	private long gameId;
 	private String gameMode;
 	private List<Participant> participants;

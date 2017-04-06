@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import lol.no.hand.service.app.rito.api.response.Summoner;
+import lol.no.hand.service.app.rito.api.response.summoner.Summoner;
 import lol.no.hand.service.app.service.RitoService;
 
 @RestController
@@ -19,8 +19,9 @@ public class SummonerController {
 	@Autowired
 	private RitoService ritoService;
 
-	@RequestMapping(value = "/summoner/{name}", method = RequestMethod.GET)
-	public ResponseEntity<Summoner> greeting(@PathVariable(value = "name") String name) throws IOException {
-		return ResponseEntity.ok(ritoService.findSummoner(name));
+	@RequestMapping(value = "/summoner/{summonerName}", method = RequestMethod.GET)
+	public ResponseEntity<Summoner> findSummoner(@PathVariable(value = "summonerName") String summonerName)
+			throws IOException {
+		return ResponseEntity.ok(ritoService.findSummoner(summonerName));
 	}
 }
