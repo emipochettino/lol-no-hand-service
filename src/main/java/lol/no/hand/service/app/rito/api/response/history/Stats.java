@@ -20,6 +20,8 @@ public class Stats {
 	private int item4;
 	private int item5;
 	private int item6;
+	//in seconds
+	private int timePlayed;
 	private int wardPlaced;
 	private int playerRole;
 }
