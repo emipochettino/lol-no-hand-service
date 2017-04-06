@@ -17,10 +17,10 @@ public class RetrofitConfiguration {
 	}
 
 	@Bean
-	public RitoApi summonerService(OkHttpClient client) {
+	public RitoApi ritoApi(OkHttpClient client) {
 		Retrofit retrofit = new Retrofit
 				.Builder()
-				.baseUrl("https://las.api.riotgames.com/api/lol/LAS/v1.4/summoner/")
+				.baseUrl("https://las.api.riotgames.com/")
 				.client(client)
 				.addConverterFactory(JacksonConverterFactory.create())
 				.build();

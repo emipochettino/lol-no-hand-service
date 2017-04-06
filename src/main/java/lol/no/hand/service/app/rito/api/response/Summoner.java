@@ -1,4 +1,4 @@
-package lol.no.hand.service.app.response.model;
+package lol.no.hand.service.app.rito.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

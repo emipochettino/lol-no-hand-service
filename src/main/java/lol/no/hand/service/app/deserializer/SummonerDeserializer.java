@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import lol.no.hand.service.app.response.model.Summoner;
+import lol.no.hand.service.app.rito.api.response.Summoner;
 
 public class SummonerDeserializer extends JsonDeserializer<Summoner> {
 	@Override
