@@ -3,7 +3,6 @@ package lol.no.hand.service.app.service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,24 +23,18 @@ public class RitoService {
 
 	public Summoner findSummoner(String summonerName) throws IOException {
 		// TODO improve this method. Use custom exceptions
-		Optional<Summoner> summoner = Optional.ofNullable(SUMMONERS.get(summonerName.toLowerCase()));
-		if (summoner.isPresent()) {
-			return summoner.get();
-		} else {
-			Response<Summoner> response = ritoApi.findSummoner(summonerName).execute();
-			if (response.code() == HttpStatus.OK.value()) {
-				summoner = Optional.ofNullable(response.body());
-				SUMMONERS.put(summonerName.toLowerCase(), summoner.get());
-				return summoner.get();
-			}
+		final Response<Summoner> response = ritoApi.findSummoner(summonerName).execute();
+		if (response.code() == HttpStatus.OK.value()) {
+			final Summoner summoner = response.body();
+			SUMMONERS.put(summonerName.toLowerCase(), summoner);
+			return summoner;
 		}
+
 		return null;
 	}
 
-	public CurrentGame findCurrentGame(String summonerName) throws IOException {
-		final Summoner summoner = findSummoner(summonerName);
-
-		Response<CurrentGame> response = ritoApi.findCurrentGame(summoner.getId()).execute();
+	public CurrentGame findCurrentGame(int summonerId) throws IOException {
+		final Response<CurrentGame> response = ritoApi.findCurrentGame(summonerId).execute();
 
 		if (response.code() == HttpStatus.OK.value()) {
 			return response.body();
@@ -51,7 +44,7 @@ public class RitoService {
 	}
 
 	public RecentHistory findRecentHistory(int summonerId) throws IOException {
-		Response<RecentHistory> response = ritoApi.findRecentHistory(summonerId).execute();
+		final Response<RecentHistory> response = ritoApi.findRecentHistory(summonerId).execute();
 
 		if (response.code() == HttpStatus.OK.value()) {
 			return response.body();
