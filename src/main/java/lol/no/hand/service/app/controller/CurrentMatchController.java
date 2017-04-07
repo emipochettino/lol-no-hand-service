@@ -16,12 +16,12 @@ import lol.no.hand.service.app.service.CurrentGameService;
 @RequestMapping("/v1/api")
 public class CurrentMatchController {
 
-	@Autowired
-	private CurrentGameService currentGameService;
+    @Autowired
+    private CurrentGameService currentGameService;
 
-	@RequestMapping(value = "/current-game/{summonerName}", method = RequestMethod.GET)
-	public ResponseEntity<CurrentGame> findCurrentGame(@PathVariable(value = "summonerName") String summonerName)
-			throws IOException {
-		return ResponseEntity.ok(currentGameService.findCurrentGame(summonerName));
-	}
+    @RequestMapping(value = "/current-game/{summonerName}", method = RequestMethod.GET)
+    public ResponseEntity<CurrentGame> findCurrentGame(@PathVariable(value = "summonerName") String summonerName)
+            throws IOException {
+        return ResponseEntity.ok(currentGameService.findCurrentGame(summonerName));
+    }
 }

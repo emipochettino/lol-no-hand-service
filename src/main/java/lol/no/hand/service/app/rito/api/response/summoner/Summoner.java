@@ -13,7 +13,7 @@ import lombok.Data;
 @JsonDeserialize(using = SummonerDeserializer.class)
 public class Summoner {
 
-	private int id;
-	private String name;
-	private int summonerLevel;
+    private int id;
+    private String name;
+    private int summonerLevel;
 }

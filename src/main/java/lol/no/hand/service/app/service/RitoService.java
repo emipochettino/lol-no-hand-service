@@ -33,7 +33,7 @@ public class RitoService {
 		return null;
 	}
 
-	public CurrentGame findCurrentGame(int summonerId) throws IOException {
+    public CurrentGame findCurrentGame(int summonerId) throws IOException {
 		final Response<CurrentGame> response = ritoApi.findCurrentGame(summonerId).execute();
 
 		if (response.code() == HttpStatus.OK.value()) {

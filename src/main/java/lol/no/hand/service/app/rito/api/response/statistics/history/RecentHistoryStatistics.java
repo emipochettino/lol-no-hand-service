@@ -1,23 +1,27 @@
 package lol.no.hand.service.app.rito.api.response.statistics.history;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.Data;
 
 @Data
+@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecentHistoryStatistics {
 	private int summonerId;
-	private int summonerName;
-	private int lastGamePlayedNbr;
-	private float kda;
-	private float kda3;
-	private float kda5;
-	private float lastWinRate;
-	private int wardPlacedProm;
+	private String summonerName;
+	private Integer lastGamePlayedNbr;
+	private Float kda;
+	private Float kda3;
+	private Float kda5;
+	private Float lastWinRate;
+	private Integer wardPlacedProm;
 	private String mostPlayedRole1;
 	private String mostPlayedRole2;
 	//TODO improve this statistic using scores minionsKilled/gameDuration without count sup role. 
-	private int minionsKilledProm;
-	private int mostChampionPlayed;
+	private Integer minionsKilledProm;
+	private Integer mostChampionPlayed1;
+	private Integer mostChampionPlayed2;
 }

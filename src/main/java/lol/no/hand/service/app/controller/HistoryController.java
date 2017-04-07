@@ -10,24 +10,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lol.no.hand.service.app.rito.api.response.history.RecentHistory;
+import lol.no.hand.service.app.rito.api.response.statistics.history.RecentHistoryStatistics;
 import lol.no.hand.service.app.service.HistoryService;
 
 @RestController
 @RequestMapping("/v1/api")
 public class HistoryController {
 
-	@Autowired
-	private HistoryService historyService;
+    @Autowired
+    private HistoryService historyService;
 
-	@RequestMapping(value = "/recent-history/{summonerId}", method = RequestMethod.GET)
-	public ResponseEntity<RecentHistory> findRecentHistoryBySummonerId(@PathVariable(value = "summonerId") int summonerId)
-			throws IOException {
-		return ResponseEntity.ok(historyService.findRecentHistoryBySummonerId(summonerId));
-	}
-	
-	@RequestMapping(value = "/recent-history/by-name/{summonerName}", method = RequestMethod.GET)
-	public ResponseEntity<RecentHistory> findRecentHistoryBySummonerName(@PathVariable(value = "summonerName") String summonerName)
-			throws IOException {
-		return ResponseEntity.ok(historyService.findRecentHistoryBySummonerName(summonerName));
-	}
+    @RequestMapping(value = "/recent-history/{summonerId}", method = RequestMethod.GET)
+    public ResponseEntity<RecentHistory> findRecentHistoryBySummonerId(
+            @PathVariable(value = "summonerId") int summonerId) throws IOException {
+        return ResponseEntity.ok(historyService.findRecentHistoryBySummonerId(summonerId));
+    }
+
+    @RequestMapping(value = "/recent-history/by-name/{summonerName}", method = RequestMethod.GET)
+    public ResponseEntity<RecentHistory> findRecentHistoryBySummonerName(
+            @PathVariable(value = "summonerName") String summonerName) throws IOException {
+        return ResponseEntity.ok(historyService.findRecentHistoryBySummonerName(summonerName));
+    }
+
+    @RequestMapping(value = "/recent-statistics/{summonerId}", method = RequestMethod.GET)
+    public ResponseEntity<RecentHistoryStatistics> findRecentStatisticsBySummonerId(
+            @PathVariable(value = "summonerId") int summonerId) throws IOException {
+        return ResponseEntity.ok(historyService.findRecentStatisticsBySummonerId(summonerId));
+    }
+
+    @RequestMapping(value = "/recent-statistics/by-name/{summonerName}", method = RequestMethod.GET)
+    public ResponseEntity<RecentHistoryStatistics> findRecentStatisticsBySummonerName(
+            @PathVariable(value = "summonerName") String summonerName) throws IOException {
+        return ResponseEntity.ok(historyService.findRecentStatisticsBySummonerName(summonerName));
+    }
 }
