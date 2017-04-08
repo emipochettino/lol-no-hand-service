@@ -53,8 +53,18 @@ public class HistoryService {
         statistics.setSummonerId(recentHistory.getSummonerId());
         statistics.setLastGamePlayedNbr((int) games.size());
         calculateWinRate(games, statistics);
-
+        calculateKDA(games, statistics);
+        calculateMinions(games, statistics);
         return statistics;
+    }
+
+    private void calculateMinions(List<Game> games, RecentHistoryStatistics statistics) {
+        final int minions = games.stream()
+                .mapToInt(x -> ((x.getStats().getMinionsKilled() + x.getStats().getNeutralMinionsKilled()) * 600)
+                        / x.getStats().getTimePlayed())
+                .sum() / games.size();
+
+        statistics.setMinionsKilledProm(minions);
     }
 
     private void calculateWinRate(final List<Game> games, final RecentHistoryStatistics statistics) {
@@ -62,4 +72,37 @@ public class HistoryService {
                 / (float) statistics.getLastGamePlayedNbr()) * 100f;
         statistics.setLastWinRate(winRate);
     }
+
+    private void calculateKDA(final List<Game> games, final RecentHistoryStatistics statistics) {
+        if (!games.isEmpty()) {
+            final float kda = ((float) games.stream().mapToInt(x -> x.getStats().getAssists()).sum()
+                    + (float) games.stream().mapToInt(x -> x.getStats().getChampionsKilled()).sum())
+                    / (float) games.stream().mapToInt(x -> x.getStats().getNumDeaths()).sum();
+            statistics.setKda(kda);
+            calculateKDA3(games, statistics);
+        }
+    }
+
+    private void calculateKDA3(final List<Game> games, final RecentHistoryStatistics statistics) {
+        if (games.size() >= 3) {
+            final List<Game> subGame = games.subList(0, 2).stream().collect(Collectors.toList());
+            final float kda = ((float) subGame.stream().mapToInt(x -> x.getStats().getAssists()).sum()
+                    + (float) subGame.stream().mapToInt(x -> x.getStats().getChampionsKilled()).sum())
+                    / (float) subGame.stream().mapToInt(x -> x.getStats().getNumDeaths()).sum();
+            statistics.setKda3(kda);
+            calculateKDA5(games, statistics);
+        }
+    }
+
+    private void calculateKDA5(final List<Game> games, final RecentHistoryStatistics statistics) {
+        if (games.size() >= 5) {
+            final List<Game> subGame = games.subList(0, 4).stream().collect(Collectors.toList());
+            final float kda = ((float) subGame.stream().mapToInt(x -> x.getStats().getAssists()).sum()
+                    + (float) subGame.stream().mapToInt(x -> x.getStats().getChampionsKilled()).sum())
+                    / (float) subGame.stream().mapToInt(x -> x.getStats().getNumDeaths()).sum();
+            statistics.setKda5(kda);
+
+        }
+    }
+
 }

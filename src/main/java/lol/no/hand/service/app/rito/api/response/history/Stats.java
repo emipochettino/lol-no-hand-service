@@ -13,6 +13,7 @@ public class Stats {
 	private boolean win;
 	private int neutralMinionsKilled;
 	private int assists;
+	private int championsKilled;
 	private int item0;
 	private int item1;
 	private int item2;
