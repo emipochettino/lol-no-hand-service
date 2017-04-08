@@ -10,19 +10,19 @@ import io.swagger.models.HttpMethod;
 
 @Configuration
 public class GlobalConfiguration {
-	private static final String ALLOWED_MAPPING = "/**";
-	private static final String ALLOWED_ORIGINS = "*";
+    private static final String ALLOWED_MAPPING = "/**";
+    private static final String ALLOWED_ORIGINS = "*";
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry
-				.addMapping(ALLOWED_MAPPING)
-				.allowedOrigins(ALLOWED_ORIGINS)
-				.allowedMethods(HttpMethod.GET.toString());
-			}
-		};
-	}
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                .addMapping(ALLOWED_MAPPING)
+                .allowedOrigins(ALLOWED_ORIGINS)
+                .allowedMethods(HttpMethod.GET.toString());
+            }
+        };
+    }
 }

@@ -11,20 +11,20 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 @Configuration
 public class RetrofitConfiguration {
 
-	@Bean
-	public OkHttpClient okHttpClient() {
-		return new OkHttpClient();
-	}
+    @Bean
+    public OkHttpClient okHttpClient() {
+        return new OkHttpClient();
+    }
 
-	@Bean
-	public RitoApi ritoApi(OkHttpClient client) {
-		Retrofit retrofit = new Retrofit
-				.Builder()
-				.baseUrl("https://las.api.riotgames.com/")
-				.client(client)
-				.addConverterFactory(JacksonConverterFactory.create())
-				.build();
+    @Bean
+    public RitoApi ritoApi(OkHttpClient client) {
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl("https://las.api.riotgames.com/")
+                .client(client)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
 
-		return retrofit.create(RitoApi.class);
-	}
+        return retrofit.create(RitoApi.class);
+    }
 }

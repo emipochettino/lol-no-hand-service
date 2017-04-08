@@ -3,15 +3,15 @@ package lol.no.hand.service.app.service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import lol.no.hand.service.app.rito.api.RitoApi;
-import lol.no.hand.service.app.rito.api.response.CurrentMatch;
-import lol.no.hand.service.app.rito.api.response.Summoner;
+import lol.no.hand.service.app.rito.api.response.current.game.CurrentGame;
+import lol.no.hand.service.app.rito.api.response.history.RecentHistory;
+import lol.no.hand.service.app.rito.api.response.summoner.Summoner;
 import retrofit2.Response;
 
 @Service
@@ -21,31 +21,35 @@ public class RitoService {
 	@Autowired
 	private RitoApi ritoApi;
 
-	public Summoner findSummoner(String name) throws IOException {
+	public Summoner findSummoner(String summonerName) throws IOException {
 		// TODO improve this method. Use custom exceptions
-		Optional<Summoner> summoner = Optional.ofNullable(SUMMONERS.get(name.toLowerCase()));
-		if (summoner.isPresent()) {
-			return summoner.get();
-		} else {
-			Response<Summoner> response = ritoApi.findSummoner(name).execute();
-			if (response.code() == HttpStatus.OK.value()) {
-				summoner = Optional.ofNullable(response.body());
-				SUMMONERS.put(name.toLowerCase(), summoner.get());
-				return summoner.get();
-			}
+		final Response<Summoner> response = ritoApi.findSummoner(summonerName).execute();
+		if (response.code() == HttpStatus.OK.value()) {
+			final Summoner summoner = response.body();
+			SUMMONERS.put(summonerName.toLowerCase(), summoner);
+			return summoner;
 		}
+
 		return null;
 	}
 
-	public CurrentMatch findCurrentMatch(String summonerName) throws IOException {
-		final Summoner summoner = findSummoner(summonerName);
-		
-		Response<CurrentMatch> response = ritoApi.findCurrentMatch(summoner.getId()).execute();
-		
-		if(response.code() == HttpStatus.OK.value()) {
+    public CurrentGame findCurrentGame(int summonerId) throws IOException {
+		final Response<CurrentGame> response = ritoApi.findCurrentGame(summonerId).execute();
+
+		if (response.code() == HttpStatus.OK.value()) {
 			return response.body();
 		}
-		
+
+		return null;
+	}
+
+	public RecentHistory findRecentHistory(int summonerId) throws IOException {
+		final Response<RecentHistory> response = ritoApi.findRecentHistory(summonerId).execute();
+
+		if (response.code() == HttpStatus.OK.value()) {
+			return response.body();
+		}
+
 		return null;
 	}
 }
