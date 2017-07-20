@@ -24,4 +24,9 @@ public class RecentHistoryStatistics {
 	private Integer minionsKilledProm;
 	private Integer mostChampionPlayed1;
 	private Integer mostChampionPlayed2;
+	private String tier;
+	private String division;
+	private Integer rankedWin;
+	private Integer rankedLosses;
+	private Float rankedWinRate;
 }
